@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Trim whitespace and strip tags from data
+ * 
+ * @param array $data form data
+ * @param array $allowedData allowed fields
+ * @return array
+ */
 function filterData($data, $allowedData)
 {
     foreach ($data as $key => $value) {
@@ -14,6 +21,13 @@ function filterData($data, $allowedData)
     return $data;
 }
 
+/**
+ * Validate form data
+ * 
+ * @param array $data form data
+ * @param array $rules validation rules
+ * @return array $errors
+ */
 function validate($data, $rules)
 {
     $errors = [];

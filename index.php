@@ -1,4 +1,7 @@
-<?php session_start();?>
+<?php 
+session_start();
+include_once('database.php');
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,8 +11,18 @@
     <body>
         <div class="container mx-auto p-5 text-center">
             <?php
-                if (!empty($errors)) {
-                    foreach ($errors as $key => $err) {
+                if (!empty($_SESSION['email'])) {
+                    $addressData = getAddressForEmail($_SESSION['email']);
+                    if (!empty($addressData)) {
+                        echo 'Address data for email <b>' . $_SESSION['email'] . '</b><br><br>';
+                        foreach ($addressData as $address) {
+                            echo $address[0] . ': ' . $address[1] . ' ' . $address[2] . '<br>';
+                        }
+                    }
+                }
+
+                if (!empty($_SESSION['errors'])) {
+                    foreach ($_SESSION['errors'] as $key => $err) {
                         echo '<div>'. $err . '</div>';
                     }
                 }
